@@ -1,0 +1,59 @@
+on join:
+	if {playerrank.%player's uuid%} is not set:
+		set {playerrank.%player's uuid%} to "&7[Default]"
+on chat:
+	if {prefix.%player's uuid%} is not set:
+		cancel event
+		broadcast "%{playerrank.%player's uuid%}% &f%player% \&8>> &f%message%"
+	if {prefix.%player's uuid%} is set:
+		cancel event
+		broadcast "%{prefix.%player's uuid%}% &f%player% &8>> &f%message%"
+command /rank [<offline player>] [<text>]:
+	permission: *
+	trigger:
+		if arg 2 is set:
+			if arg 2 is "Mod":
+				set {playerrank.%arg-1's uuid%} to "&e[Mod]"
+				console command "pex user %arg 1% group set Mod"
+			if arg 2 is "Helper":
+				set {playerrank.%arg-1's uuid%} to "&5[Helper]"
+				console command "pex user %arg 1% group set Helper"
+			if arg 2 is "Admin":
+				set {playerrank.%arg-1's uuid%} to "&4[Admin]"
+				console command "pex user %arg 1% group set admin"
+			if arg 2 is "Builder":
+				set {playerrank.%arg-1's uuid%} to "&3[Builder]"
+				console command "pex user %arg 1% group set builder"
+			if arg 2 is "Manager":
+				set {playerrank.%arg-1's uuid%} to "&4[Manager]"
+				console command "pex user %arg 1% group set Manager"
+			if arg 2 is "CoOwner":
+				set {playerrank.%arg-1's uuid%} to "&4[Co-Owner]"
+				console command "pex user %arg 1% group set CoOwner"
+			if arg 2 is "Owner":
+				set {playerrank.%arg-1's uuid%} to "&4[Owner]"
+				console command "pex user %arg 1% group set Owner"
+			if arg 2 is "Default":
+				set {playerrank.%arg-1's uuid%} to "&7[Default]"
+				console command "pex user %arg 1% group set Default"
+			if arg 2 is "Vip":
+				set {playerrank.%arg-1's uuid%} to "&2[Vip]"
+				console command "pex user %arg 1% group set Vip"
+			if arg 2 is "MVP":
+				set {playerrank.%arg-1's uuid%} to "&1[MVP]"
+				console command "pex user %arg 1% group set MVP"
+			if arg 2 is "Skripter":
+				set {playerrank.%arg-1's uuid%} to "&2[Skripter]"
+				console command "pex user %arg 1% group set skripter"
+command /prefix [<offline player>] [<text>]:
+	permission: *
+	trigger:
+		if arg-2 is set:
+			if arg-1 is set:
+				set {prefix.%arg-1's uuid%} to colored arg-2
+				if arg-2 is "clear":
+					clear {prefix.%arg-1's uuid%}
+			if arg-1 is not set:
+				set {prefix.%player's uuid%} to colored arg-2
+		if arg-1 is "clear":
+			clear {prefix.%player's uuid%}
